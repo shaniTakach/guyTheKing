@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="he">
+    <head>
+        <meta charset="UTF-8">
+        <title>הפרופיל שלי - GoldenMatch</title>
+        <style>
+            body {
+                background-color: #B1C29E;
+                text-align: center;
+            }
+
+            header {
+                background-color: #FADA7A;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 style="color: #F0A04B;">הפרופיל שלי</h1>
+        </header>
+        <form method="post" action="/save-profile">
+            <p>שם מלא: <input type="text" name="fullName" required></p>
+            <p>גיל: <input type="number" name="age" required></p>
+            <p>עיר מגורים: <input type="text" name="city" required></p>
+            <p>תחומי עניין: <input type="text" name="interests"></p>
+            <p><input type="submit" value="עדכן פרופיל"></p>
+        </form>
+    </body>
+</html>
