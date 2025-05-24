@@ -1,9 +1,225 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Scroll Profiles</title>
-    </head>
-    <body>
-        <h1>Scroll through Profiles</h1>
-    </body>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <title> חיפוש משתמשים  </title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%; width: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      direction: rtl;
+      background: #2c4a4d;
+      position: relative;
+      color: white;
+    }
+
+    /* מיכל התוכן המרכזי */
+    .content {
+      position: relative;
+      z-index: 10;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #fdfdfd;
+    }
+
+    /* מיכל הרקע */
+    .floating-images {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; /* כדי שהעכבר יעבור דרכם */
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* תמונות מרחפות */
+    .floating-images img {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      user-select: none;
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
+    }
+
+    /* אנימציות תנועה */
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes floatLeftRight {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+    }
+    @keyframes floatRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* הגדלים, מיקומים ואנימציות מתוזמנות וסימטריות */
+    /* צד שמאל */
+    .img1 {
+      width: 130px;
+      top: 15%;
+      left: 5%;
+      animation: floatUpDown 6s infinite;
+    }
+    .img3 {
+      width: 110px;
+      top: 55%;
+      left: 10%;
+      animation: floatLeftRight 7s infinite;
+      animation-delay: 1.5s;
+    }
+    .img6 {
+      width: 140px;
+      top: 80%;
+      left: 8%;
+      animation: floatUpDown 5.5s infinite;
+      animation-delay: 3s;
+    }
+
+    /* מרכז שמאל */
+    .img2 {
+      width: 90px;
+      top: 25%;
+      left: 25%;
+      animation: floatRotate 20s linear infinite;
+    }
+    .img8 {
+      width: 115px;
+      top: 65%;
+      left: 22%;
+      animation: floatLeftRight 8.5s infinite;
+      animation-delay: 2s;
+      animation-direction: reverse;
+    }
+
+    /* מרכז ימין */
+    .img4 {
+      width: 130px;
+      top: 20%;
+      right: 25%;
+      animation: floatUpDown 6.5s infinite;
+      animation-delay: 1s;
+    }
+    .img9 {
+      width: 115px;
+      top: 60%;
+      right: 23%;
+      animation: floatRotate 18s linear infinite;
+      animation-delay: 0.5s;
+    }
+
+    /* צד ימין */
+    .img5 {
+      width: 120px;
+      top: 10%;
+      right: 5%;
+      animation: floatLeftRight 7.5s infinite;
+      animation-direction: reverse;
+    }
+    .img7 {
+      width: 105px;
+      top: 45%;
+      right: 8%;
+      animation: floatUpDown 5.8s infinite;
+      animation-delay: 2.7s;
+    }
+    .img10 {
+      width: 135px;
+      top: 85%;
+      right: 12%;
+      animation: floatLeftRight 8.2s infinite;
+    }
+
+    /* שדה החיפוש ועיצובו */
+    form {
+      background-color: rgba(232, 73, 113, 0.85);
+      padding: 20px 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
+    input[type="text"] {
+      padding: 12px 15px;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      outline: none;
+      font-family: inherit;
+      color: #222;
+      font-weight: 600;
+    }
+
+    input[type="submit"] {
+      background-color: #ffffff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 15px;
+      color: #e84971;
+      font-size: 22px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      align-self: center;
+      width: 100px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #e84971;
+      color: white;
+    }
+
+    p.explanation {
+      color: #eee;
+      font-size: 14px;
+      margin: 0 auto 5px auto;
+      max-width: 400px;
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-images">
+    <img class="img1" src="https://randomuser.me/api/portraits/men/21.jpg" alt="User 1" draggable="false" />
+    <img class="img2" src="https://randomuser.me/api/portraits/men/93.jpg" alt="User 2" draggable="false" />
+    <img class="img3" src="https://randomuser.me/api/portraits/men/13.jpg" alt="User 3" draggable="false" />
+    <img class="img4" src="https://randomuser.me/api/portraits/women/69.jpg" alt="User 4" draggable="false" />
+    <img class="img5" src="https://thumbs.dreamstime.com/z/portrait-happy-elderly-gray-haired-woman-years-old-against-background-european-old-architecture-portrait-happy-304788311.jpg?ct=jpeg" alt="User 5" draggable="false" />
+    <img class="img6" src="https://randomuser.me/api/portraits/women/50.jpg" alt="User 6" draggable="false" />
+    <img class="img7" src="https://randomuser.me/api/portraits/men/55.jpg" alt="User 7" draggable="false" />
+    <img class="img8" src="https://randomuser.me/api/portraits/women/45.jpg" alt="User 8" draggable="false" />
+    <img class="img9" src="https://randomuser.me/api/portraits/men/65.jpg" alt="User 9" draggable="false" />
+    <img class="img10" src="https://randomuser.me/api/portraits/women/60.jpg" alt="User 10" draggable="false" />
+  </div>
+
+  <div class="content">
+    <h1>חפש משתמשים ב-GoldenMatch</h1>
+    <form method="get" action="/search">
+      <input type="text" name="query" placeholder="חפש משתמשים..." required />
+      <p class="explanation">
+        חפש לפי כל מילה, גיל, תחומי עניין או מאפיינים אישיים כדי למצוא את ההתאמה המושלמת עבורך.
+      </p>
+      <input type="submit" value="🔍" />
+    </form>
+  </div>
+
+</body>
 </html>
